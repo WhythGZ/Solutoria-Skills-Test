@@ -1,0 +1,10 @@
+CREATE TABLE indicadores(  
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombreIndicador VARCHAR(40),
+    codigoIndicador VARCHAR(40),
+    unidadMedidaIndicador VARCHAR(40),
+    valorIndicador int,
+    fechaIndicador VARCHAR(40),
+    tiempoIndicador VARCHAR(40),
+    origenIndicador VARCHAR(40)
+);
