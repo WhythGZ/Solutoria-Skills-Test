@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IndicadoresController;
 use App\Models\Indicador;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Indicadores.index');
-});
+// Route::get('/', function () {
+//     return view('indicador.index');
+// });
 
-Route::resource('indicador',Indicador::class);
+Route::resource('indicador', IndicadoresController::class);
