@@ -1,6 +1,6 @@
 @extends('indicador.base')
 @section('content')
-<div class="card m-3">
+<div class="card m-3 pb-3">
     <div class="card-header">
         <h6 class="fst-italic fw-normal text-center">Mantenedor Indicadores<h6>
     </div>
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="card-footer container">
-        <table class="table table-info table-striped caption-top">
+        <table class="table table-info table-striped caption-top" id="tablaIndicadores">
             <caption class="text-center">Lista de Indicadores</caption>
             <thead>
               <tr>
@@ -103,10 +103,42 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="d-flex justify-content-end m-5">
-            {{$indicadores->links()}}
+        <div class="row">
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <span class="text-info fw-bold fs-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-braces" viewBox="0 0 16 16">
+                        <path d="M2.114 8.063V7.9c1.005-.102 1.497-.615 1.497-1.6V4.503c0-1.094.39-1.538 1.354-1.538h.273V2h-.376C3.25 2 2.49 2.759 2.49 4.352v1.524c0 1.094-.376 1.456-1.49 1.456v1.299c1.114 0 1.49.362 1.49 1.456v1.524c0 1.593.759 2.352 2.372 2.352h.376v-.964h-.273c-.964 0-1.354-.444-1.354-1.538V9.663c0-.984-.492-1.497-1.497-1.6zM13.886 7.9v.163c-1.005.103-1.497.616-1.497 1.6v1.798c0 1.094-.39 1.538-1.354 1.538h-.273v.964h.376c1.613 0 2.372-.759 2.372-2.352v-1.524c0-1.094.376-1.456 1.49-1.456V7.332c-1.114 0-1.49-.362-1.49-1.456V4.352C13.51 2.759 12.75 2 11.138 2h-.376v.964h.273c.964 0 1.354.444 1.354 1.538V6.3c0 .984.492 1.497 1.497 1.6z"/>
+                    </svg> Solutoria-ST</span>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-end m-5">
+                    {{$indicadores->links()}}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        var tablaIndicadores = $('#tablaIndicadores').DataTable({
+            processing: true,
+            serverSide:true,
+            ajax:{
+                url:"{{route('indicador.index')}}"
+            },
+            columns:[
+                {data: 'id'},
+                {data: 'nombreIndicador'},
+                {data: 'codigoIndicador'},
+                {data: 'unidadMedidaIndicador'},
+                {data: 'valorIndicador'},
+                {data: 'tiempoIndicador'},
+                {data: 'origenIndicador'},
+            ]
+        });
+    });
+</script>
+
 @endsection
+
