@@ -1,66 +1,58 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">Proyecto Solutoria Skills Test</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto fue creado en base a una lista de instrucciones diseñadas para medir mi habiliad en el ambito de la tecnologia.
+El Proyecto se divide en 2 grandes partes:
 
-## About Laravel
+- Script de Python para:
+    - obtener token.
+    - obtener datos entregados por la API.
+    - importar los datos a la base de datos (configurada en el .env).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Proyecto de Laravel con:
+    - Mantenedor de los datos importados.
+    - Gráfico de los datos importados filtrables por Fecha.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Configuracion del Proyecto
+Antes de ejecutar el proyecto hay una serie de pasos que se deben realizar para una correcta configuración del proyecto.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Requisitos principales
+Para una correcta ejecución del proyecto debe poseer una versión mayor o igual de:
 
-## Learning Laravel
+- Laravel >= 10.6.2
+- Python >= 3.11.2
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Crear tabla requerida en la base de datos
+Para crear la tabla requerida para el ejercicio dirijase a la carpeta del proyecto, dentro de esta encontrara un archivo llamado `db.txt`. Este archivo posee una sentencia SQL para crear la tabla necesaria.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Instalar requerimientos
+Para instalar las librerias necesarias para una correcta ejecucion del script de Python dirigase a la carpeta raíz del proyecto y ejecute la siguiente linea de comando: 
+```python
+pip install -r requirements.txt
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Configurar .env
+El `.env` se encuentra en la raíz del proyecto, con el nombre de `.env.example` debes editarlo y quitarle el `.example`, una vez editado es necesario configurar las siguientes variables:
+```
+DB_HOST
+DB_DATABASE
+DB_USERNAME
+DB_PASSWORD
+```
 
-## Laravel Sponsors
+## Ejecutar Proyecto
+Una vez configurado el proyecto solo queda seguir los siguientes pasos para una correcta ejecución de este:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Importar base de datos
+Para importar la base de datos solo es necesario que tengas a mano las credenciales entregadas para el consumo de la api, dirijete a la raíz del proyecto y ejectua el siguiente comando: 
+```python
+python db_import.py 
+```
+Una vez ejecutado el comando el script te pedira que ingreses tu credencial de acceso, una vez ingresado este obtendra el token, hara una petición para obtener los datos y los importara a la base de datos establecida anteriormente en el .env.
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Ejectuar Laravel
+Ya completados los pasos anteriores solo queda ejecutar el proyecto Laravel dirijiendose a la carpeta raíz y ejecutando la siguiente linea de comando: 
+```
+php artisan serve
+```
+Este comando correra el servidor y ya solo quedaria ingresar mediante un navegador a la url entregada.
