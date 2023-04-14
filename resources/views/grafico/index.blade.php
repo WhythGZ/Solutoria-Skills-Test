@@ -4,11 +4,11 @@
 
 <div class="card m-3 pb-3">
     <div class="card-header">
-        <h6 class="fst-italic fw-normal text-center">Formulario de Grafico<h6>
+        <h6 class="fst-italic fw-normal text-center">Formulario de Gráfico<h6>
     </div>
     <div class="card-body">
         <div class="container">
-            <h4 class="text-center">Formulario para generar Grafico</h4>
+            <h4 class="text-center">Formulario para generar Gráfico</h4>
             <form action="{{route('grafico')}}" method="POST">
                 @csrf
                 @if (session('success'))
@@ -43,7 +43,7 @@
                     </select>
                 </div>
                 <div class="mt-3 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-outline-info">Generar Grafico</button>
+                    <button type="submit" class="btn btn-outline-info">Generar Gráfico</button>
                 </div>
             </form>
         </div>

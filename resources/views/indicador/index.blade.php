@@ -37,7 +37,7 @@
                         <input required type="text" name="nombreIndicador" class="form-control" id="nombreIndicador">
                     </div>
                     <div class="col-6">
-                        <label for="codigoIndicador">Codigo</label>
+                        <label for="codigoIndicador">Código</label>
                         <input required type="text" name="codigoIndicador" class="form-control" id="codigoIndicador">
                     </div>
                 </div>
@@ -64,7 +64,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Codigo</th>
+                <th scope="col">Código</th>
                 <th scope="col">Unidad de Medida</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Fecha</th>
@@ -118,27 +118,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function(){
-        var tablaIndicadores = $('#tablaIndicadores').DataTable({
-            processing: true,
-            serverSide:true,
-            ajax:{
-                url:"{{route('indicador.index')}}"
-            },
-            columns:[
-                {data: 'id'},
-                {data: 'nombreIndicador'},
-                {data: 'codigoIndicador'},
-                {data: 'unidadMedidaIndicador'},
-                {data: 'valorIndicador'},
-                {data: 'tiempoIndicador'},
-                {data: 'origenIndicador'},
-            ]
-        });
-    });
-</script>
-
 @endsection
 

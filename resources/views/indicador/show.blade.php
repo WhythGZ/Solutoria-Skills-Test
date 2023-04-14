@@ -38,7 +38,7 @@
                         <input required type="text" name="nombreIndicador" class="form-control" id="nombreIndicador" value="{{$indicador->nombreIndicador}}">
                     </div>
                     <div class="col-6">
-                        <label for="codigoIndicador">Codigo</label>
+                        <label for="codigoIndicador">Código</label>
                         <input required type="text" name="codigoIndicador" class="form-control" id="codigoIndicador" value="{{$indicador->codigoIndicador}}">
                     </div>
                 </div>
