@@ -50,9 +50,20 @@ python db_import.py
 ```
 Una vez ejecutado el comando el script te pedira que ingreses tu credencial de acceso, una vez ingresado este obtendra el token, hara una petición para obtener los datos y los importara a la base de datos establecida anteriormente en el .env.
 
-### Ejectuar Laravel
-Ya completados los pasos anteriores solo queda ejecutar el proyecto Laravel dirijiendose a la carpeta raíz y ejecutando la siguiente linea de comando: 
+## Ejectuar Laravel
+### Instalar librerias de Laravel
+Para instalar las librerias necesarias para correr el proyecto Laravel ejecute el siguiente comando en su directorio raíz:
+```
+composer install
+```
+### Generar KEY del Proyecto
+La primera vez que inicias el proyecto debes generar una key para ingresar. Esta se genera con el siguiente comando:
+```
+php artisan key:generate
+```
+### Ejecutar Proyecto
+Ya completados los pasos anteriores solo queda ejecutar el proyecto Laravel dirijiendose a la carpeta raíz y ejecutando las siguientes lineas de comando: 
 ```
 php artisan serve
 ```
-Este comando correra el servidor y ya solo quedaria ingresar mediante un navegador a la url entregada.
+Este comando corre el servidor quedando solo por hacer ingresar s la url entregada mediante tu navegador favorito.
