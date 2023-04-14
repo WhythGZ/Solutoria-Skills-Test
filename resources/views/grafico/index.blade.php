@@ -23,11 +23,6 @@
                 @error('nombreIndicador')
                     <h6 class="alert alert-danger">{{ $message }}</h6>
                 @enderror
-                @if (isset($fechaInicio)&&isset($fechaTermino)&&isset($nombreIndicador))
-                    <div hidden id="fechaInicio">{{$fechaInicio}}</div>
-                    <div hidden id="fechaTermino">{{$fechaTermino}}</div>
-                    <div hidden id="nombreIndicador">{{$nombreIndicador}}</div>
-                @endif
                 <div class="row mt-2">
                     <div class="col-6 mt-2">
                         <label for="fechaInicio">Desde</label>
@@ -53,10 +48,6 @@
             </form>
         </div>
     </div>
-    <div class="card-footer container">
-        
-    </div>
 </div>
-
 
 @endsection

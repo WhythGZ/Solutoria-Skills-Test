@@ -20,7 +20,14 @@ class GraficoController extends Controller
         $fechaInicio = $request->fechaInicio;
         $fechaTermino = $request->fechaTermino;
         $nombreIndicador = $request->nombreIndicador;
+        $query = Indicador::select('valorIndicador', 'fechaIndicador')->where('nombreIndicador','=',$nombreIndicador)->whereBetween('fechaIndicador', [$fechaInicio, $fechaTermino])->get();
+        $fechas = [];
+        $data = [];
+        foreach ($query as $q){
+            array_push($fechas, $q->fechaIndicador);
+            array_push($data, $q->valorIndicador);
+        }
         $indicadores = Indicador::select('nombreIndicador')->distinct()->get();
-        return view('grafico.index')->with(['fechaInicio'=>$fechaInicio,'fechaTermino'=>$fechaTermino,'nombreIndicador'=>$nombreIndicador, 'indicadores'=>$indicadores]);
+        return view('grafico.show')->with(['fechas'=>$fechas, 'data'=>$data, 'indicadores'=>$indicadores, 'nombreIndicador'=>$nombreIndicador, 'fechaInicio'=>$fechaInicio, 'fechaTermino'=>$fechaTermino]);
     }
 }
