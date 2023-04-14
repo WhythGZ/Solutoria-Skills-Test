@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('indicador.index');
-// });
+Route::get('/', function () {
+    return redirect('indicador');
+});
 
 Route::resource('indicador', IndicadoresController::class);
 

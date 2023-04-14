@@ -1,24 +1,48 @@
 import requests
 import mysql.connector
+from os.path import join, dirname
+import os
+from dotenv import load_dotenv
 
-auth_token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQb3N0dWxhY2lvbmVzSldUU2VydmljZUFjY2Vzc1Rva2VuIiwianRpIjoiYmM1MzdjZjAtMWQxMi00MTAxLWFmZGMtYzE3YzJkMjEyNjViIiwiaWF0IjoiNC8xMi8yMDIzIDExOjIyOjE0IFBNIiwiVXNlcklkIjoiSWQiLCJEaXNwbGF5TmFtZSI6IlBvc3R1bGFudGUgMjAyMzA0IiwiVXNlck5hbWUiOiJhbGlnb256YWxlenFydXR4dF9qYWNAaW5kZWVkZW1haWwuY29tIiwiRW1haWwiOiJhbGlnb256YWxlenFydXR4dF9qYWNAaW5kZWVkZW1haWwuY29tIiwiZXhwIjoxNjgxMzU2NDM0LCJpc3MiOiJodHRwczovL3NvbHV0b3JpYS5jbC8iLCJhdWQiOiJKV1RTZXJ2aWNlUG9zdHVsYW50ZSJ9.Pe3cozod_3awVfQn9jbTpH_U_WRhQJIAzKhHH7CWj9Q'
+#cargando el .env
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
+#obtencion de token
+username = input('Ingrese su username de acceso: ')
+url = 'https://postulaciones.solutoria.cl/api/acceso'
+json = {
+  "userName": username,
+  "flagJson": True
+}
+
+response = requests.post(url=url, json=json) 
+auth_token = response.json()['token']
+
+#obtencion de indicadores
+print('Obteniendo indicadores...')
 header = {'Authorization': 'Bearer ' + auth_token}
 url = 'https://postulaciones.solutoria.cl/api/indicadores'
 response = requests.get(url=url, headers=header)
-print(response)
-
 data = response.json()
 
-conexion = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="solutoria"
-)
+#obteniendo los valores de la db desde el .env
+db_host = os.environ.get("DB_HOST")
+db_user = os.environ.get("DB_USERNAME")
+db_password = os.environ.get("DB_PASSWORD")
+db_database = os.environ.get("DB_DATABASE")
 
+#conectandose a la db
+conexion = mysql.connector.connect(
+    host=db_host,
+    user=db_user,
+    password=db_password,
+    database=db_database
+)
 cursor = conexion.cursor()
 
+#rellenando la tabla indicadores
+print('Importando indicadores a la base de datos (esto podria tardar varios minutos)...')
 for indicador in data:
     nombreIndicador = indicador['nombreIndicador']
     codigoIndicador = indicador['codigoIndicador']
@@ -31,6 +55,7 @@ for indicador in data:
     valores = (nombreIndicador, codigoIndicador, unidadMedidaIndicador, valorIndicador, fechaIndicador, tiempoIndicador, origenIndicador)
     cursor.execute(consulta, valores)
     conexion.commit()
-
+    
+print('Indicadores importados correctamente...')
 cursor.close()
 conexion.close()
