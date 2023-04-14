@@ -1,4 +1,4 @@
-@extends('indicador.base')
+@extends('base')
 @section('content')
 <div class="card m-3 pb-3">
     <div class="card-header">

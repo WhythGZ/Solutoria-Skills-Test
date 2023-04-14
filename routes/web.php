@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GraficoController;
 use App\Http\Controllers\IndicadoresController;
 use App\Models\Indicador;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('indicador', IndicadoresController::class);
+
+Route::get('grafico', [GraficoController::class, 'index'])->name('grafico');
+Route::post('grafico', [GraficoController::class, 'genGraph'])->name('grafico');
